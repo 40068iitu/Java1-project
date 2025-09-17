@@ -1,0 +1,359 @@
+public class EX15 {
+    public static void main(String[] args) {
+        int[] arr = {3, 7, 1, 9, 5};
+        int minIndex = 0, maxIndex = 0;
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] < arr[minIndex]) minIndex = i;
+            if (arr[i] > arr[maxIndex]) maxIndex = i;
+        }
+        int temp = arr[minIndex];
+        arr[minIndex] = arr[maxIndex];
+        arr[maxIndex] = temp;
+
+        System.out.print("Результат: ");
+        for (int x : arr) {
+            System.out.print(x + " ");
+        }
+    }
+}
+
+public class EX16 {
+    public static String reverse(String s) {
+        String result = "";
+        for (int i = s.length() - 1; i >= 0; i--) {
+            result += s.charAt(i);
+        }
+        return result;
+    }
+    public static void main(String[] args) {
+        String text = "hello";
+        System.out.println(reverse(text)); // "olleh"
+    }
+}
+
+import java.util.*;
+public class EX17 {
+    public static void main(String[] args) {
+        int[] arr = {4, 5, 4, 2, 5, 3, 2, 1};
+        Set<Integer> set = new LinkedHashSet<>();
+        for (int x : arr) {
+            set.add(x);
+        }
+        System.out.println("Массив без дубликатов: " + set);
+    }
+}
+
+public class EX18 {
+    public static void main(String[] args) {
+        int[] arr = {10, 5, 20, 8, 20, 3};
+        int max = Integer.MIN_VALUE;
+        int secondMax = Integer.MIN_VALUE;
+        for (int num : arr) {
+            if (num > max) {
+                secondMax = max;
+                max = num;
+            } else if (num > secondMax && num < max) {
+                secondMax = num;
+            }
+        }
+        if (secondMax == Integer.MIN_VALUE) {
+            System.out.println("Нет второго максимума");
+        } else {
+            System.out.println("Второй максимум: " + secondMax);
+        }
+    }
+}
+
+import java.util.*;
+public class EX19 {
+    public static void main(String[] args) {
+        int[] arr1 = {1, 3, 5, 7};
+        int[] arr2 = {3, 5, 8, 9};
+        Set<Integer> merged = new LinkedHashSet<>();
+        for (int x : arr1) merged.add(x);
+        for (int x : arr2) merged.add(x);
+        System.out.println("Объединённый массив без дубликатов: " + merged);
+    }
+}
+
+import java.util.*;
+public class EX20 {
+    public static List<String> split(String s, char delimiter) {
+        List<String> parts = new ArrayList<>();
+        StringBuilder current = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            if (c == delimiter) {
+                parts.add(current.toString());
+                current.setLength(0); // очистить
+            } else {
+                current.append(c);
+            }
+        }
+        parts.add(current.toString()); // добавить последний кусок
+        return parts;
+    }
+    public static void main(String[] args) {
+        String text = "one,two,three,four";
+        List<String> result = split(text, ',');
+        System.out.println(result); // [one, two, three, four]
+    }
+}
+
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+public class Main {
+    public static void main(String[] args) {
+        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
+        // to see how IntelliJ IDEA suggests fixing it.
+        System.out.printf("Hello and welcome!");
+
+        for (int i = 1; i <= 5; i++) {
+            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
+            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
+            System.out.println("i = " + i);
+        }
+    }
+}
+import java.util.*;
+public class EX1 {
+    public static void main(String[] args) {
+        String input = "Java is great and Java is powerful";
+        Arrays.stream(input.toLowerCase().split("\\s+"))
+                .distinct()
+                .forEach(System.out::println);
+    }
+}
+
+import java.util.*;
+public class EX2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Write words or senteces:");
+        String input = sc.nextLine();
+        String[] words = input.split("\\s+");
+        String longest = "";
+
+        for (String w : words) {
+            if (w.length() > longest.length()) {
+                longest = w;
+            }
+        }
+        System.out.println("The longest word: " + longest);
+    }
+}
+
+import java.util.*;
+
+public class EX3 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Введите строку:");
+        String input = sc.nextLine().toLowerCase();
+
+        int vowels = 0, consonants = 0;
+        String vowelSet = "aeiou";
+
+        for (char c : input.toCharArray()) {
+            if (Character.isLetter(c)) { // только английские буквы
+                if (vowelSet.indexOf(c) != -1) {
+                    vowels++;
+                } else {
+                    consonants++;
+                }
+            }
+        }
+
+        System.out.println("Гласные: " + vowels);
+        System.out.println("Согласные: " + consonants);
+    }
+}
+
+import java.util.Scanner;
+public class EX4 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Введите строку:");
+        String input = sc.nextLine();
+        String clean = input.replaceAll("\\s+", "").toLowerCase();
+        String reversed = new StringBuilder(clean).reverse().toString();
+        if (clean.equals(reversed)) {
+            System.out.println("Это палиндром");
+        } else {
+            System.out.println("Не палиндром");
+        }
+    }
+}
+
+public class EX5 {
+    public static int findSubstring(String text, String pattern) {
+        if (text == null || pattern == null) return -1;
+        int n = text.length();
+        int m = pattern.length();
+        if (m == 0) return 0;
+        if (m > n) return -1;
+        for (int i = 0; i <= n - m; i++) {
+            int j = 0;
+            while (j < m && text.charAt(i + j) == pattern.charAt(j)) {
+                j++;
+            }
+            if (j == m) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    public static void main(String[] args) {
+        System.out.println(findSubstring("hello world", "world"));
+        System.out.println(findSubstring("abcabc", "cab"));
+        System.out.println(findSubstring("abcdef", "gh"));
+    }
+}
+
+import java.util.Scanner;
+public class EX6 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Введите количество элементов: ");
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        System.out.println("Введите числа:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - 1 - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int tmp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = tmp;
+                }
+            }
+        }
+        System.out.println("Отсортированный массив:");
+        for (int x : arr) {
+            System.out.print(x + " ");
+        }
+    }
+}
+
+public class EX7 {
+    public static int sumNumbers(String s) {
+        int sum = 0;
+        String num = "";
+        for (char c : s.toCharArray()) {
+            if (Character.isDigit(c)) {
+                num += c;
+            } else {
+                if (!num.isEmpty()) {
+                    sum += Integer.parseInt(num);
+                    num = "";
+                }
+            }
+        }
+        if (!num.isEmpty()) {
+            sum += Integer.parseInt(num);
+        }
+        return sum;
+    }
+    public static void main(String[] args) {
+        String s = "a12bc34d5";
+        System.out.println(sumNumbers(s));
+    }
+}
+
+import java.util.*;
+public class EX8 {
+    public static void main(String[] args) {
+        int[] arr = {4, 2, 4, 5, 2, 3, 1};
+        Set<Integer> seen = new HashSet<>();
+        Set<Integer> duplicates = new HashSet<>();
+        for (int num : arr) {
+            if (!seen.add(num)) {
+                duplicates.add(num);
+            }
+        }
+        System.out.println("Moda " + duplicates);
+    }
+}
+
+import java.util.Arrays;
+public class EX9 {
+    public static boolean isAnagram(String s1, String s2) {
+        if (s1.length() != s2.length()) return false;
+        char[] a = s1.toCharArray();
+        char[] b = s2.toCharArray();
+        Arrays.sort(a);
+        Arrays.sort(b);
+        return Arrays.equals(a, b);
+    }
+    public static void main(String[] args) {
+        System.out.println(isAnagram("listen", "silent"));
+        System.out.println(isAnagram("hello", "world"));
+    }
+}
+
+public class EX10 {
+    public static String removeSpaces(String s) {
+        return s.replaceAll("\\s+", "");
+    }
+    public static void main(String[] args) {
+        String text = " a b\tc\nd e ";
+        System.out.println(removeSpaces(text));
+    }
+}
+
+import java.util.*;
+public class EX11 {
+    public static void main(String[] args) {
+        String s = "abacacb";
+        Map<Character, Integer> freq = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            freq.put(c, freq.getOrDefault(c, 0) + 1);
+        }
+        for (Map.Entry<Character, Integer> entry : freq.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+}
+
+public class EX12 {
+    public static int fib(int n) {
+        if (n <= 1) return n;
+        return fib(n - 1) + fib(n - 2);
+    }
+    public static void main(String[] args) {
+        int n = 10; // сколько чисел вывести
+        for (int i = 0; i < n; i++) {
+            System.out.print(fib(i) + " ");
+        }
+    }
+}
+
+public class EX13 {
+    public static void main(String[] args) {
+        int n = 50;
+        for (int i = 2; i <= n; i++) {
+            if (isPrime(i)) {
+                System.out.print(i + " ");
+            }
+        }
+    }
+    public static boolean isPrime(int num) {
+        if (num < 2) return false;
+        for (int i = 2; i * i <= num; i++) {
+            if (num % i == 0) return false;
+        }
+        return true;
+    }
+}
+
+public class EX14 {
+    public static void main(String[] args) {
+        int[] arr = {5, 7, 3, 9, 4, 6};
+        int sum = 0;
+        for (int i = 0; i < arr.length; i += 2) {
+            sum += arr[i];
+        }
+        System.out.println("Сумма элементов на чётных индексах: " + sum);
+    }
+}
